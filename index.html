@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Percentage </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #f2fa84dc, #fcabe4);
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }S
+    .calculator {
+      background: #9dedef;
+      box-shadow: 0 4px 8px rgba(40, 224, 89, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      width: 350px;
+      text-align: center;
+    }
+    .calculator h1 {
+      margin-bottom: 20px;
+      color: #444;
+    }
+    .input-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f1f1f1;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1>Exam Calculator</h1>
+    <div class="input-group">
+      <label for="obtained-marks">Obtained Marks:</label>
+      <input type="number" id="obtained-marks" placeholder="Enter obtained marks">
+    </div>
+    <div class="input-group">
+      <label for="total-marks">Total Marks:</label>
+      <input type="number" id="total-marks" placeholder="Enter total marks">
+    </div>
+    <button onclick="calculate()">Calculate</button>
+    <div class="result" id="result" style="display: none;">
+      <p><strong>Percentage:</strong> <span id="percentage"></span>%</p>
+      <p><strong>Grade:</strong> <span id="grade"></span></p>
+    </div>
+  </div>
+
+  <script>
+    function calculate() {
+      const obtainedMarks = parseFloat(document.getElementById('obtained-marks').value);
+      const totalMarks = parseFloat(document.getElementById('total-marks').value);
+      
+      if (isNaN(obtainedMarks) || isNaN(totalMarks) || obtainedMarks < 0 || totalMarks <= 0 || obtainedMarks > totalMarks) {
+        alert("Please enter valid numbers. Obtained marks must be between 0 and total marks.");
+        return;
+      }
+      
+      const percentage = (obtainedMarks / totalMarks) * 100;
+      let grade = '';
+
+    switch (true) {
+      case (percentage >= 90):
+        grade = 'A+';
+        break;
+      case (percentage >= 80):
+        grade = 'A';
+        break;
+      case (percentage >= 70):
+        grade = 'B+';
+        break;
+      case (percentage >= 60):
+        grade = 'B';
+        break;
+      case (percentage >= 50):
+        grade = 'C';
+        break;
+      case (percentage >= 40):
+        grade = 'D';
+        break;
+      default:
+        grade = 'F';
+    }
+  
+      document.getElementById('percentage').innerText = percentage.toFixed(2);
+      document.getElementById('grade').innerText = grade;
+      document.getElementById('result').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
